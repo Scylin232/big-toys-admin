@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
+import { Router } from '@angular/router'; 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -20,35 +21,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
   themes = [
     {
       value: 'default',
-      name: 'Light',
+      name: 'Светлая',
     },
     {
       value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
+      name: 'Тёмная',
     },
   ];
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Выйти' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router: Router) {
   }
 
   ngOnInit() {
+    this.menuService.onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'logout-context'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title => this.router.navigate(['auth/logout']));
+
     this.currentTheme = this.themeService.currentTheme;
 
     this.userService.getUsers()

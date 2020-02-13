@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
+import { HttpClient } from '@angular/common/http';
 import { SmartTableData } from '../../../@core/data/smart-table';
 
 @Component({
@@ -15,53 +16,66 @@ export class SmartTableComponent {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
+      city: {
+        title: 'Город',
         type: 'string',
       },
-      lastName: {
-        title: 'Last Name',
+      areas: {
+        title: 'Районы (Через запятую)',
         type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
       },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    this.source.load(data);
+  constructor(private service: SmartTableData, private http: HttpClient) {
+    this.service.getData().then(res => {
+      this.source.load(res);
+    });
   }
 
   onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm('Вы точно хотите удалить эту запись?')) {
+      this.http.delete<any>('http://localhost:4615/places', {params: event.data, responseType: 'blob' as 'json'})
+        .subscribe(() => {});
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  onEditConfirm(event) {
+    if (window.confirm('Вы точно хотите отредактировать данную запись?')) {
+      const summaryData = {
+        old: JSON.stringify(event.data),
+        new: JSON.stringify(event.newData),
+      };
+      this.http.put<any>('http://localhost:4615/places', {}, { params: summaryData, responseType: 'blob' as 'json' })
+        .subscribe(() => {});
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  onCreateConfirm(event) {
+    if (window.confirm('Вы точно хотите создать данную запись?')) {
+      this.http.post<any>('http://localhost:4615/places', {}, { params: event.newData, responseType: 'blob' as 'json' })
+        .subscribe(() => {});
       event.confirm.resolve();
     } else {
       event.confirm.reject();

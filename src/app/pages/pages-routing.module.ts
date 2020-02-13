@@ -12,7 +12,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: ECommerceComponent,
+      // component: ECommerceComponent,
     },
     {
       path: 'iot-dashboard',
