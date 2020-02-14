@@ -6,6 +6,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'clipboard-outline',
     link: '/pages/tables/smart-table',
   },
+  {
+    title: 'Товары',
+    icon: 'shopping-cart-outline',
+    link: '/pages/forms/buttons',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,
