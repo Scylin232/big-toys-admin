@@ -33,6 +33,10 @@ export class FormInputsComponent {
         title: 'Цена',
         type: 'number',
       },
+      response: {
+        title: 'Описание',
+        type: 'string',
+      },
     },
   };
 

@@ -23,6 +23,15 @@
               Общее количество пользователей за всё время составялет: {{statisticObject.usersCount}} шт.
             </div>
           </div>
+          <div class="item text-warning">
+            <div class="color bg-status-warning"></div>
+            <div>
+              <h5 class="text-warning">Остаток</h5>
+              <ng-container *ngFor="let product of statisticObject.products" >
+                Имя товара: "{{product.title}}", Цена: {{product.price}} грн, Остаток: {{product.stock.length}} шт.
+              </ng-container>
+            </div>
+          </div>
         </div>
       </nb-card-body>
     </nb-card>

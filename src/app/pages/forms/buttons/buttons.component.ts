@@ -53,6 +53,16 @@ export class ButtonsComponent {
           title: 'Цена',
           type: 'number',
         },
+        stock: {
+          title: 'Остаток',
+          type: 'array',
+          valuePrepareFunction: (value) => {
+            if (!Array.isArray(value)) {
+              return `${value.split(',').length} шт.`;
+            }
+            return `${value.length} шт.`;
+          },
+        },
       },
     };
   }
@@ -63,50 +73,13 @@ export class ButtonsComponent {
     this.http.get<any>('http://localhost:4615/places').subscribe(res => {
       res.forEach(place => {
         this.citiesList.push({ value: place.city, title: place.city });
-        this.placesList.push({ value: place.areas, title: place.areas });
+        place.areas.forEach(area => {
+          this.placesList.push({ value: area, title: area });
+        });
       });
-      this.usersSettings = {
-        add: {
-          addButtonContent: '<i class="nb-plus"></i>',
-          createButtonContent: '<i class="nb-checkmark"></i>',
-          cancelButtonContent: '<i class="nb-close"></i>',
-          confirmCreate: true,
-        },
-        edit: {
-          editButtonContent: '<i class="nb-edit"></i>',
-          saveButtonContent: '<i class="nb-checkmark"></i>',
-          cancelButtonContent: '<i class="nb-close"></i>',
-          confirmSave: true,
-        },
-        delete: {
-          deleteButtonContent: '<i class="nb-trash"></i>',
-          confirmDelete: true,
-        },
-        columns: {
-          title: {
-            title: 'Название',
-            type: 'string',
-          },
-          description: {
-            title: 'Описание',
-            type: 'string',
-          },
-          city: {
-            title: 'Город',
-            type: 'string',
-            editor: { type: 'list', config: { list: this.citiesList } },
-          },
-          area: {
-            title: 'Районы',
-            type: 'array',
-            editor: { type: 'list', config: { list: this.placesList } },
-          },
-          price: {
-            title: 'Цена',
-            type: 'number',
-          },
-        },
-      };
+      this.usersSettings.columns.area.editor = { type: 'list', config: { list: this.placesList } };
+      this.usersSettings.columns.city.editor = { type: 'list', config: { list: this.citiesList } };
+      this.usersSettings = Object.assign({}, this.usersSettings);
     });
     this.http.get<any>('http://localhost:4615/products').subscribe(res => {
       this.usersSource.load(res);
