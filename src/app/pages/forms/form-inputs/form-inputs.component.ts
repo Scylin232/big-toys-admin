@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LocalDataSource } from 'ng2-smart-table';
+
+import { SmartTableData } from '../../../@core/data/smart-table'
 
 @Component({
   selector: 'ngx-form-inputs',
@@ -6,8 +10,37 @@ import { Component } from '@angular/core';
   templateUrl: './form-inputs.component.html',
 })
 export class FormInputsComponent {
+  usersSettings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
+    columns: {
+      buyerUsername: {
+        title: 'Имя покупателя',
+        type: 'string',
+      },
+      buyerId: {
+        title: 'Айди покупателя',
+        type: 'number',
+      },
+      date: {
+        title: 'Дата покупки',
+        type: 'string',
+      },
+      price: {
+        title: 'Цена',
+        type: 'number',
+      },
+    },
+  };
 
-  starRate = 2;
-  heartRate = 4;
-  radioGroupValue = 'This is value 2';
+  usersSource: LocalDataSource = new LocalDataSource();
+
+  constructor(private service: SmartTableData, private http: HttpClient) {
+    this.http.get<any>('http://localhost:4615/history').subscribe(res => {
+      this.usersSource.load(res);
+    });
+  }
 }

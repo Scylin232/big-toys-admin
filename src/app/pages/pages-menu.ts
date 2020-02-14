@@ -11,6 +11,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: '/pages/forms/buttons',
   },
+  {
+    title: 'Пользователи',
+    icon: 'person-outline',
+    link: '/pages/forms/datepicker',
+  },
+  {
+    title: 'Заказы',
+    icon: 'archive-outline',
+    link: '/pages/forms/inputs',
+  },
+  {
+    title: 'Статистика',
+    icon: 'pie-chart-outline',
+    link: '/pages/ui-features/typography',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,
