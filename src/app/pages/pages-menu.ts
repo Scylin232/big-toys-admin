@@ -26,6 +26,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'pie-chart-outline',
     link: '/pages/ui-features/typography',
   },
+  {
+    title: 'Промокоды',
+    icon: 'pricetags-outline',
+    link: '/pages/forms/layouts',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,

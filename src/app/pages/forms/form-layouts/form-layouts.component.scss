@@ -1,15 +1,7 @@
-nb-checkbox {
-  margin-bottom: 1rem;
-}
+@import '../../../@theme/styles/themes';
 
-.form-inline [fullWidth] {
-  flex: 1;
-}
-
-.form-inline > * {
-  margin: 0 1.5rem 1.5rem 0;
-}
-
-nb-card.inline-form-card nb-card-body {
-  padding-bottom: 0;
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
 }
