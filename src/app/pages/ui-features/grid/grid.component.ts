@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'ngx-grid',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   templateUrl: './grid.component.html',
 })
 export class GridComponent {
+  constructor (private http: HttpClient) {}
 
+  responseMessage: string;
+
+  sendMailing(content: string) {
+    if (content) {
+      this.http.post('http://localhost:4615/mailing', {}, {
+        params: { mailingText: content },
+        responseType: 'blob' as 'json',
+      }).subscribe(() => {
+        this.responseMessage = '✅Рассылка запущена успешно!';
+      });
+    }
+  }
 }

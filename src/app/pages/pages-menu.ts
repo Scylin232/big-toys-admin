@@ -31,6 +31,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'pricetags-outline',
     link: '/pages/forms/layouts',
   },
+  {
+    title: 'Рассылка',
+    icon: 'email-outline',
+    link: '/pages/ui-features/grid',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,
