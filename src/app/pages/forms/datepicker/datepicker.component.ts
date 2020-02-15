@@ -39,7 +39,7 @@ export class DatepickerComponent {
   usersSource: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData, private http: HttpClient) {
-    this.http.get<any>('http://localhost:4615/users').subscribe(res => {
+    this.http.get<any>('http://95.179.132.10:4615/users').subscribe(res => {
       this.usersSource.load(res);
     });
   }

@@ -50,7 +50,7 @@ export class SmartTableComponent {
 
   onDeleteConfirm(event): void {
     if (window.confirm('Вы точно хотите удалить эту запись?')) {
-      this.http.delete<any>('http://localhost:4615/places', {params: event.data, responseType: 'blob' as 'json'})
+      this.http.delete<any>('http://95.179.132.10:4615/places', {params: event.data, responseType: 'blob' as 'json'})
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
@@ -64,7 +64,7 @@ export class SmartTableComponent {
         old: JSON.stringify(event.data),
         new: JSON.stringify(event.newData),
       };
-      this.http.put<any>('http://localhost:4615/places', {}, { params: summaryData, responseType: 'blob' as 'json' })
+      this.http.put<any>('http://95.179.132.10:4615/places', {}, { params: summaryData, responseType: 'blob' as 'json' })
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
@@ -74,7 +74,7 @@ export class SmartTableComponent {
 
   onCreateConfirm(event) {
     if (window.confirm('Вы точно хотите создать данную запись?')) {
-      this.http.post<any>('http://localhost:4615/places', {}, { params: event.newData, responseType: 'blob' as 'json' })
+      this.http.post<any>('http://95.179.132.10:4615/places', {}, { params: event.newData, responseType: 'blob' as 'json' })
         .subscribe(() => {});
       event.confirm.resolve();
     } else {

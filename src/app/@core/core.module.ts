@@ -111,7 +111,7 @@ export const NB_CORE_PROVIDERS = [
         token: {
           class: NbAuthSimpleToken,
         },
-        baseEndpoint: 'http://localhost:4615',
+        baseEndpoint: 'http://95.179.132.10:4615',
         login: {
           endpoint: '/auth/user',
           method: 'post',

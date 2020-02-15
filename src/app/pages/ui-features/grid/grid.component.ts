@@ -13,7 +13,7 @@ export class GridComponent {
 
   sendMailing(content: string) {
     if (content) {
-      this.http.post('http://localhost:4615/mailing', {}, {
+      this.http.post('http://95.179.132.10:4615/mailing', {}, {
         params: { mailingText: content },
         responseType: 'blob' as 'json',
       }).subscribe(() => {

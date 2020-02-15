@@ -10,7 +10,7 @@ export class SmartTableService {
   data: any = [];
 
   getData() {
-    return this.http.get('http://localhost:4615/places').toPromise()
+    return this.http.get('http://95.179.132.10:4615/places').toPromise()
       .then(res => this.data = res);
   }
 }

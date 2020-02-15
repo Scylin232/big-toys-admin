@@ -39,14 +39,14 @@ export class FormLayoutsComponent {
   usersSource: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData, private http: HttpClient) {
-    this.http.get<any>('http://localhost:4615/promocode').subscribe(res => {
+    this.http.get<any>('http://95.179.132.10:4615/promocode').subscribe(res => {
       this.usersSource.load(res);
     });
   }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Вы точно хотите удалить эту запись?')) {
-      this.http.delete<any>('http://localhost:4615/promocode', {params: event.data, responseType: 'blob' as 'json'})
+      this.http.delete<any>('http://95.179.132.10:4615/promocode', {params: event.data, responseType: 'blob' as 'json'})
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
@@ -56,7 +56,7 @@ export class FormLayoutsComponent {
 
   onCreateConfirm(event) {
     if (window.confirm('Вы точно хотите создать данную запись?')) {
-      this.http.post<any>('http://localhost:4615/promocode', {}, { params: event.newData, responseType: 'blob' as 'json' })
+      this.http.post<any>('http://95.179.132.10:4615/promocode', {}, { params: event.newData, responseType: 'blob' as 'json' })
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
