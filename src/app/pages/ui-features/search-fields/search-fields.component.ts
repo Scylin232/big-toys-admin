@@ -7,13 +7,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./search-fields.component.scss'],
 })
 export class SearchComponent {
-  constructor (private http: HttpClient) {}
+  constructor (private http: HttpClient) {
+    this.http.get<any>('http://95.179.132.10:4615/easyPayApiUrl', { responseType: 'text' as 'json'}).subscribe(res => {
+      this.easyPayApiUrl = res;
+    });
+  }
 
   responseMessage: string;
+  easyPayApiUrl: string;
 
   updateEasyPay(login: string, password: string) {
     if (login.trim() && password.trim()) {
-      return this.http.post<any>('http://localhost:4515/setCredentials', {}, {
+      return this.http.post<any>(`${this.easyPayApiUrl}/setCredentials`, {}, {
         params: { login: login, password: password },
         responseType: 'blob' as 'json',
       }).subscribe(() => {
