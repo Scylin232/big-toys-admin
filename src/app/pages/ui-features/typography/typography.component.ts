@@ -14,4 +14,8 @@ export class TypographyComponent {
       this.statisticObject = res;
     });
   }
+
+  roundNumber(number: number) {
+    return Math.round(number);
+  }
 }
