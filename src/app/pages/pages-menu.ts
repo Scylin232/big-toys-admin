@@ -36,6 +36,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'email-outline',
     link: '/pages/ui-features/grid',
   },
+  {
+    title: 'EasyPay',
+    icon: 'credit-card-outline',
+    link: '/pages/ui-features/search-fields',
+  },
   // {
   //   title: 'FEATURES',
   //   group: true,
