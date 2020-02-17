@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LocalDataSource } from 'ng2-smart-table';
-
 import { SmartTableData } from '../../../@core/data/smart-table';
+import envimorent from '../../../../../env';
 
 @Component({
   selector: 'ngx-buttons',
@@ -70,7 +70,7 @@ export class ButtonsComponent {
   usersSource: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData, private http: HttpClient) {
-    this.http.get<any>('http://95.179.132.10:4615/places').subscribe(res => {
+    this.http.get<any>(`http://${envimorent.apiUrl}:4615/places`).subscribe(res => {
       res.forEach(place => {
         this.citiesList.push({ value: place.city, title: place.city });
         place.areas.forEach(area => {
@@ -81,14 +81,14 @@ export class ButtonsComponent {
       this.usersSettings.columns.city.editor = { type: 'list', config: { list: this.citiesList } };
       this.usersSettings = Object.assign({}, this.usersSettings);
     });
-    this.http.get<any>('http://95.179.132.10:4615/products').subscribe(res => {
+    this.http.get<any>(`http://${envimorent.apiUrl}:4615/products`).subscribe(res => {
       this.usersSource.load(res);
     });
   }
 
   onDeleteConfirm(event): void {
     if (window.confirm('Вы точно хотите удалить эту запись?')) {
-      this.http.delete<any>('http://95.179.132.10:4615/products', {params: event.data, responseType: 'blob' as 'json'})
+      this.http.delete<any>(`http://${envimorent.apiUrl}:4615/products`, {params: event.data, responseType: 'blob' as 'json'})
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
@@ -102,7 +102,7 @@ export class ButtonsComponent {
         old: JSON.stringify(event.data),
         new: JSON.stringify(event.newData),
       };
-      this.http.put<any>('http://95.179.132.10:4615/products', {}, { params: summaryData, responseType: 'blob' as 'json' })
+      this.http.put<any>(`http://${envimorent.apiUrl}:4615/products`, {}, { params: summaryData, responseType: 'blob' as 'json' })
         .subscribe(() => {});
       event.confirm.resolve();
     } else {
@@ -112,7 +112,7 @@ export class ButtonsComponent {
 
   onCreateConfirm(event) {
     if (window.confirm('Вы точно хотите создать данную запись?')) {
-      this.http.post<any>('http://95.179.132.10:4615/products', {}, { params: event.newData, responseType: 'blob' as 'json' })
+      this.http.post<any>(`http://${envimorent.apiUrl}:4615/products`, {}, { params: event.newData, responseType: 'blob' as 'json' })
         .subscribe(() => {});
       event.confirm.resolve();
     } else {

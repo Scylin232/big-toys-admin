@@ -52,6 +52,7 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
+import envimorent from '../../../env';
 
 const socialLinks = [
   {
@@ -111,7 +112,7 @@ export const NB_CORE_PROVIDERS = [
         token: {
           class: NbAuthSimpleToken,
         },
-        baseEndpoint: 'http://95.179.132.10:4615',
+        baseEndpoint: `http://${envimorent.apiUrl}:4615`,
         login: {
           endpoint: '/auth/user',
           method: 'post',

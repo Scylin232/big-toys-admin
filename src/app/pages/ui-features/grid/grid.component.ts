@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import envimorent from '../../../../../env';
 
 @Component({
   selector: 'ngx-grid',
@@ -13,7 +14,7 @@ export class GridComponent {
 
   sendMailing(content: string) {
     if (content) {
-      this.http.post('http://95.179.132.10:4615/mailing', {}, {
+      this.http.post(`http://${envimorent.apiUrl}:4615/mailing`, {}, {
         params: { mailingText: content },
         responseType: 'blob' as 'json',
       }).subscribe(() => {

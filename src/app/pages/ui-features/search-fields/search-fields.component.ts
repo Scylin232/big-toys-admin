@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import envimorent from '../../../../../env';
 
 @Component({
   selector: 'ngx-search-fields',
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchComponent {
   constructor (private http: HttpClient) {
-    this.http.get<any>('http://95.179.132.10:4615/easyPayApiUrl', { responseType: 'text' as 'json'}).subscribe(res => {
+    this.http.get<any>(`http://${envimorent.apiUrl}:4615/easyPayApiUrl`, { responseType: 'text' as 'json'}).subscribe(res => {
       this.easyPayApiUrl = res;
     });
   }
