@@ -58,9 +58,9 @@ export class ButtonsComponent {
           type: 'array',
           valuePrepareFunction: (value) => {
             if (!Array.isArray(value)) {
-              return `${value.split(',').length} шт.`;
+              return `${value.split(',').filter(Boolean).length} шт.`;
             }
-            return `${value.length} шт.`;
+            return `${value.filter(Boolean).length} шт.`;
           },
         },
       },

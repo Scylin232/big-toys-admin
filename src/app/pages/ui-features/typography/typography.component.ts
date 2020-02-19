@@ -19,4 +19,8 @@ export class TypographyComponent {
   roundNumber(number: number) {
     return Math.round(number);
   }
+
+  transformStock(stock: any[]) {
+    return stock.filter(Boolean).length;
+  }
 }

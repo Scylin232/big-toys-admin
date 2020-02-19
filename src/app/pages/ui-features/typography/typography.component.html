@@ -28,7 +28,7 @@
             <div>
               <h5 class="text-heading">Остаток</h5>
               <ng-container *ngFor="let product of statisticObject.products" >
-                Имя товара: "{{product.title}}", Цена: {{product.price}} грн, Остаток: {{product.stock.length}} шт.
+                Имя товара: "{{product.title}}", Цена: {{product.price}} грн, Остаток: {{transformStock(product.stock)}} шт.
                 <br>
               </ng-container>
             </div>
