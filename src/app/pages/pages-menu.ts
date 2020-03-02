@@ -37,7 +37,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/ui-features/grid',
   },
   {
-    title: 'EasyPay',
+    title: 'Платёжные данные',
     icon: 'credit-card-outline',
     link: '/pages/ui-features/search-fields',
   },

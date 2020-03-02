@@ -14,7 +14,8 @@ export class SearchComponent {
     });
   }
 
-  responseMessage: string;
+  responseMessageEasyPay: string;
+  responseMessageGlobalMoney: string;
   easyPayApiUrl: string;
 
   updateEasyPay(login: string, password: string) {
@@ -23,9 +24,21 @@ export class SearchComponent {
         params: { login: login, password: password },
         responseType: 'blob' as 'json',
       }).subscribe(() => {
-        this.responseMessage = '✅ Новые данные применены корректно!';
+        this.responseMessageEasyPay = '✅ Новые данные применены корректно!';
       });
     }
-    this.responseMessage = '❌ Одно из полей отсутвует! Пожалуйста, убедитесь, что всё заполнено корректно.';
+    this.responseMessageEasyPay = '❌ Одно из полей отсутвует! Пожалуйста, убедитесь, что всё заполнено корректно.';
+  }
+
+  updateGlobalMoney(login: string, password: string) {
+    if (login.trim() && password.trim()) {
+      return this.http.post<any>(`${this.easyPayApiUrl}/setCredentialsGlobalMoney`, {}, {
+        params: { login: login, password: password },
+        responseType: 'blob' as 'json',
+      }).subscribe(() => {
+        this.responseMessageGlobalMoney = '✅ Новые данные применены корректно!';
+      });
+    }
+    this.responseMessageGlobalMoney = '❌ Одно из полей отсутвует! Пожалуйста, убедитесь, что всё заполнено корректно.';
   }
 }

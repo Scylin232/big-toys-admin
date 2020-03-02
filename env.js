@@ -1,5 +1,5 @@
 const envimorent = {
-  apiUrl: '95.179.132.10'
+  apiUrl: 'localhost'
 }
 
 export default envimorent
